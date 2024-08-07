@@ -1,23 +1,19 @@
-import express from "express"
-import { v4 } from "uuid"
-import User from "./app/models/user.js"
+import { Router } from 'express';
+import { v4 } from 'uuid';
+import User from './app/models/user.js';
 
-const app = express()
+const routes = new Router();
 
-app.get("/home", async (req, res) => {
+routes.get('/home', async (req, res) => {
+  const user = await User.create({
+    id: v4(),
+    name: 'foi',
+    email: ' era',
+    password_hash: 'paulo',
+  });
+  return res.status(201).json(user);
+});
 
-    const user = await User.create({
-        id: v4(),
-        name: "Sequelize.STRING",
-        email:" Sequelize.STRING",
-        password_hash: "Sequelize.STRING",
-       
+export default routes;
 
-
-
-    })
-    return res.status(201).json(user)
-})
-
-export default app
 
